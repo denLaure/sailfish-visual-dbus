@@ -107,6 +107,16 @@ Page {
                    verticalAlignment: Text.AlignVCenter
                    color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
                }
+
+               onClicked: {
+                   if (type === 'Paths') {
+                       var path = servicePath[servicePath.length - 1] === '/' ? servicePath + name : servicePath + '/' + name;
+                       pageStack.push(Qt.resolvedUrl("ServicePage.qml"),
+                                      {"serviceName": serviceName,
+                                          "serviceBus": serviceBus,
+                                          "servicePath": path});
+                   }
+               }
            }
        section.property: "type"
        section.delegate: Label {
