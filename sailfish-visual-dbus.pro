@@ -41,3 +41,6 @@ DISTFILES += \
     qml/pages/ServicePage.qml \
     qml/pages/MethodResultPage.qml
 
+RESOURCES += \
+    resources.qrc
+
