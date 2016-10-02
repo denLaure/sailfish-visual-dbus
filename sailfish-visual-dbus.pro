@@ -38,5 +38,6 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/sailfish-visual-dbus-de.ts
 
 DISTFILES += \
-    qml/pages/ServicePage.qml
+    qml/pages/ServicePage.qml \
+    qml/pages/MethodResultPage.qml
 

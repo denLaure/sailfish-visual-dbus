@@ -143,6 +143,7 @@ Page {
        delegate: ListItem {
                id: listItem
                contentHeight: Theme.itemSizeMedium
+               property int additionalIndex: index
 
                Label {
                    id: label
@@ -157,6 +158,13 @@ Page {
                }
 
                menu: ContextMenu {
+                   onActivated: {
+                       pageStack.push(Qt.resolvedUrl("MethodResultPage.qml"),
+                                      {"serviceName": serviceName, "serviceBus": serviceBus,
+                                       "servicePath": servicePath, 'serviceInterface': name,
+                                       "methodName": interfaceModel.get(additionalIndex)['method' + (index + 1)]});
+                   }
+
                    MenuItem {
                        text: type === 'Interfaces' && method1 !== '' ? method1 : ''
                        visible: type === 'Interfaces' && method1 !== ''
