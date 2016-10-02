@@ -37,3 +37,6 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/sailfish-visual-dbus-de.ts
 
+DISTFILES += \
+    qml/pages/ServicePage.qml
+
