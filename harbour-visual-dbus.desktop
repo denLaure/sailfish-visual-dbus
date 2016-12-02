@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=sailfish-visual-dbus
-Exec=sailfish-visual-dbus
+Icon=harbour-visual-dbus
+Exec=harbour-visual-dbus
 Name=Visual D-Bus
 

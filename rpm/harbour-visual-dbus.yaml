@@ -1,18 +1,21 @@
-Name: sailfish-visual-dbus
-Summary: Visual client for SailfishOS
-Version: 0.1
+Name: harbour-visual-dbus
+Summary: Visual D-Bus client for Sailfish OS
+Version: 1.0
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
 # http://gitorious.org/meego-developer-tools/spectacle/blobs/master/data/GROUPS
 Group: Qt/Qt
-URL: http://example.org/
-License: LICENSE
+URL: http://fruct.org/
+License: MIT License
 # This must be generated before uploading a package to a remote build service.
 # Usually this line does not need to be modified.
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
-  Short description of my Sailfish OS Application
+  Visual D-Bus is an application that allows to introspect D-Bus objects.
+  The tool allows to switch between service and system bus.
+  With Visual D-Bus you can also call methods of selected interfaces.
+  Finally, you can read and write interface properties.
 Configure: none
 # The qtc5 builder inserts macros to allow QtCreator to have fine
 # control over qmake/make execution
@@ -34,7 +37,6 @@ PkgConfigBR:
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
   - nemo-qml-plugin-dbus-qt5
-  - qt5-qtdeclarative-import-xmllistmodel
 
 # All installed files
 Files:

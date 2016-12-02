@@ -13,33 +13,42 @@ Page {
     Component.onCompleted: {
         dbusList.typedCall('ListNames', undefined,
                            function(result) {
-                                sessionServices = result.filter(function(value) {return value[0] !== ':'}).sort();
-                           },
-                           function() { console.log('failed to receive session services.') });
+                               sessionServices = result.filter(function(value) {return value[0] !== ':'}).sort();
+                           }, function() {
+                               pageStack.push(Qt.resolvedUrl("FailedToRecieveServicesDialog.qml"));
+                           });
         dbusList.bus = DBus.SystemBus;
         dbusList.typedCall('ListNames', undefined,
                            function(result) {
-                                systemServices = result.filter(function(value) {return value[0] !== ':'}).sort();
-                           },
-                           function() { console.log('failed to receive system services.') });
+                               systemServices = result.filter(function(value) {return value[0] !== ':'}).sort();
+                           }, function() {
+                               pageStack.push(Qt.resolvedUrl("FailedToRecieveServicesDialog.qml"));
+                           });
     }
 
-    DBusInterface {
-        id: dbusList
-        service: 'org.freedesktop.DBus'
-        path: '/org/freedesktop/DBus'
-        iface: 'org.freedesktop.DBus'
-        bus: DBus.SessionBus
+DBusInterface {
+    id: dbusList
+    service: 'org.freedesktop.DBus'
+    path: '/org/freedesktop/DBus'
+    iface: 'org.freedesktop.DBus'
+    bus: DBus.SessionBus
+}
+
+    PageHeader {
+        id: header
+        anchors.top: parent.top
+        title: "Visual D-Bus"
     }
+
     SilicaListView {
         anchors {
-            top: parent.top
+            top: header.bottom
             right: parent.right
             left: parent.left
             bottom: switchButton.top
         }
         clip: true
-        model: isSessionServices ? sessionServices: systemServices
+        model: isSessionServices ? sessionServices : systemServices
         spacing: Theme.paddingSmall
         delegate: ListItem {
             id: listItem
@@ -57,20 +66,20 @@ Page {
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
             onClicked: {
-                var curBus = isSessionServices ? DBus.SessionBus : DBus.SystemBus
-                pageStack.push(Qt.resolvedUrl("ServicePage.qml"), {"serviceName": serviceNameLabel.text, "serviceBus": curBus});
+                pageStack.push(Qt.resolvedUrl("ServicePathsListPage.qml"),
+                               {"serviceName": serviceNameLabel.text, "isSystemBus": !isSessionServices});
             }
         }
     }
+
     ValueButton {
         id: switchButton
         anchors {
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-            margins: Theme.horizontalPageMargin
         }
-        label: "Bus"
+        label: "Bus: "
         value: isSessionServices ? "Session" : "System"
         onClicked: isSessionServices = !isSessionServices
     }
